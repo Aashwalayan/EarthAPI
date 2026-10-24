@@ -1,0 +1,93 @@
+/* Small overlays on top of the globe: info card (top-left) and legend (bottom-left). */
+
+.feature-card,
+.legend {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  color: #e8eef5;
+  background: rgba(14, 20, 29, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+/* ---- info card ---- */
+.feature-card {
+  top: 16px;
+  left: 16px;
+  width: min(320px, calc(100% - 32px));
+  max-height: calc(100% - 100px);
+  overflow-y: auto;
+  padding: 14px 16px 12px;
+}
+
+.feature-card__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #9fb0c3;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.feature-card__close:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+.feature-card__title {
+  margin: 0 28px 2px 0;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.feature-card__subtitle { margin: 0 0 10px; color: #9fb0c3; }
+
+.feature-card__fields { margin: 0; }
+.feature-card__fields > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 5px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.feature-card__fields dt { color: #9fb0c3; flex: none; }
+.feature-card__fields dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.feature-card__fields a { color: #7cc4ff; text-decoration: none; }
+.feature-card__fields a:hover { text-decoration: underline; }
+
+/* ---- legend ---- */
+.legend {
+  left: 16px;
+  bottom: 40px; /* clear of Cesium's credit bar */
+  padding: 10px 14px;
+  pointer-events: none;
+}
+.legend section + section { margin-top: 8px; }
+.legend h3 { margin: 0 0 4px; font-size: 12px; font-weight: 600; color: #9fb0c3; }
+.legend ul { margin: 0; padding: 0; list-style: none; }
+.legend li { display: flex; align-items: center; white-space: nowrap; }
+.legend__count { margin-left: auto; padding-left: 14px; color: #9fb0c3; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 600px) {
+  .feature-card { top: auto; bottom: 40px; left: 12px; right: 12px; width: auto; max-height: 55%; }
+  .legend { display: none; }
+}
